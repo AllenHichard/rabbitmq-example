@@ -8,11 +8,12 @@ class Producer:
         self.bootstrap_servers = env.bootstrap_servers
         self.connection = None
         self.channel = None
+        self.__connect_rabbitmq_server()
 
     def callback(self, method, properties, body):
         print("Mensagem recebida: %r" % body)
 
-    def connect_rabbitmq_server(self):
+    def __connect_rabbitmq_server(self):
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(self.bootstrap_servers))
         self.channel = self.connection.channel()
 
